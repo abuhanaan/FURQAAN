@@ -1,0 +1,21 @@
+{% extends 'inventory/inventory_base.html' %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+    <h1>
+        
+        {% if not form.instance.pk %}
+            Transaction Page
+            {% else %}
+            Update Transaction
+        {% endif %}
+            
+    </h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+{% endblock %}

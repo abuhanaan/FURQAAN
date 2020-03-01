@@ -1,0 +1,18 @@
+{% extends 'inventory/inventory_base.html' %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+    
+    <div class="jumbotron">
+        <h2>Item details</h2>
+        <p>Name: {{item_detail.item_name}}</p>
+        <p>Manufacturer: {{item_detail.maker}}</p>
+        <p>Quantity in Stock: {{item_detail.quantity}}</p>
+        <p>Price: {{item_detail.priceByDefault}}</p>
+    </div>
+
+    <div class="container">
+        <p><a href="{% url 'inventory:update' pk=item_detail.pk %}" class="btn btn-warning">Update</a></p>
+    </div>
+    
+{% endblock %}

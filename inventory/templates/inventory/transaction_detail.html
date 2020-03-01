@@ -1,0 +1,20 @@
+{% extends 'inventory/inventory_base.html' %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+    
+    <div class="jumbotron">
+        <h2>Transaction details</h2>
+        <p>Name: {{transaction_detail.custName}}</p>
+        <p>Address: {{transaction_detail.custAdd}}</p>
+        <p>Item: {{transaction_detail.item}}</p>
+        <p>Quantity: {{transaction_detail.quantity}}</p>
+        <p>IMEI: {{transaction_detail.imei}}</p>
+        <p>Amount Paid: {{transaction_detail.sellPrice}}</p>
+    </div>
+
+    <div class="container">
+        <p><a href="{% url 'inventory:update-trans' pk=transaction_detail.pk %}" class="btn btn-warning">Update</a></p>
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'inventory/inventory_base.html' %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+    
+    {% for transaction in transactions %}
+        <h2><li><a href="{{transaction.id}}">{{transaction.item}}</a></li></h2>
+    {% endfor %}
+        
+{% endblock %}
+
+    
