@@ -21,5 +21,8 @@ from django.conf.urls import url, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', views.IndexView.as_view(), name='home'),
-    url(r'^inventory/', include('inventory.urls', namespace='inventory'))
+    url(r'^inventory/', include('inventory.urls', namespace='inventory')),
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url()
 ]
