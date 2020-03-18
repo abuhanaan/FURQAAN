@@ -1,7 +1,12 @@
-{% extends 'inventory/inventory_base.html' %}
+{% extends 'base.html' %}
 {% load bootstrap3 %}
 
 {% block body_block %}
+    
+
+{% if user.is_authenticated %}
+    
+
     
     <div class="jumbotron">
         <h2>Transaction details</h2>
@@ -16,5 +21,7 @@
     <div class="container">
         <p><a href="{% url 'inventory:update-trans' pk=transaction_detail.pk %}" class="btn btn-warning">Update</a></p>
     </div>
+
+    {% endif %}
     
 {% endblock %}

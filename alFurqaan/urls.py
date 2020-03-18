@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^inventory/', include('inventory.urls', namespace='inventory')),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url()
+    url(r'^test/$', views.TestPage.as_view(), name='test'),
+    url(r'^thanks/$', views.ThanksPage.as_view(), name='thanks'),
 ]

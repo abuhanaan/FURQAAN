@@ -1,7 +1,12 @@
-{% extends 'inventory/inventory_base.html' %}
+{% extends 'base.html' %}
 {% load bootstrap3 %}
 
 {% block body_block %}
+
+
+{% if user.is_authenticated %}
+    
+    
     <h1>
         
         {% if not form.instance.pk %}
@@ -18,4 +23,7 @@
         {{ form.as_p }}
         <input type="submit" class="btn btn-primary" value="Submit">
     </form>
+
+    {% endif %}
+
 {% endblock %}

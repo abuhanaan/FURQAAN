@@ -7,6 +7,14 @@ from django.views.generic import (TemplateView, ListView, DetailView,
 # Create your views here.
 
 
+class TestPage(TemplateView):
+    template_name = 'test.html'
+
+
+class ThanksPage(TemplateView):
+    template_name = 'thanks.html'
+
+
 class IndexView(TemplateView):
     template_name = 'index.html'
 
