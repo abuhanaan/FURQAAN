@@ -21,9 +21,41 @@
         {% csrf_token %}
         
         {{ form.as_p }}
+
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+            
+            
         <input type="submit" class="btn btn-primary" value="Submit">
     </form>
 
+
+    
+    <!-- 
+    <script>
+function logBookMgmt(trans_item, log_item, log_inStock) {
+    var trans_item = transaction.item.item_name
+    var log_item = log.item.item_name
+    var log_inStock = log.quantity_inStock
+    var trans_quantity = transaction.quantity
+    var log_quantity = log.quantity_assigned
+
+    if (trans_item == log_item && trans_quantity < log_quantity) {
+        log_inStock += trans_quantity
+    } else {
+        alert("The quantity you are selling out is lower than the quantity in your stock. Contact the admin to get more of this particular item.")
+    }
+    return log_inStock
+}
+    </script>
+                -->
+
     {% endif %}
+            
 
 {% endblock %}

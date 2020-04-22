@@ -2,7 +2,13 @@
 
 {% block body_block %}
 
-<h1>Welcome; You are now logged in!</h1>
+
+{% if user.is_authenticated %}
+
+    <h1>Welcome {{ user.username }}; You are now logged in!</h1>
+
+{% endif %}
+    
     
 {% endblock body_block %}
     

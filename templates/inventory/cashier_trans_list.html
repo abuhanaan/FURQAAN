@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+<div class="col-md-4">
+    <h1>{{ transaction_user.username }}</h1>
+    <p>Transactions History</p>
+</div>
+<div class="col-md-8">
+    
+    {% for transaction in transactions %}
+        
+
+        <div class="post media">
+	
+	<div class="media-body">
+		<strong>{{ transaction.user.username }}</strong>
+		<h5 class="media-heading">
+			<span class="username"><a href="{% url 'transactions:for_user' username=transaction.user.username %}">{{ transaction.user.username }}</a></span>
+			<time class="time"><a href="{% url 'inventory:trans-detail' username=transaction.user.username pk=transaction.pk %}">{{ transaction.time }}</a></time>
+		</h5>
+
+
+
+
+		<div class="media-footer">
+			{% if user.is_authenticated and transacton.user == user and not hide_delete %}
+				<a href="{% url 'inventory:delete-trans' pk=transaction.pk %}" title="delete" class="btn btn-simple">
+					<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+					<span class="text-danger icon-label">Delete</span>
+				</a>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+
+
+    {% endfor %}
+        
+</div>
+{% endblock %}
+    

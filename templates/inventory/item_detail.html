@@ -14,7 +14,8 @@
     </div>
 
     <div class="container">
-        <p><a href="{% url 'inventory:update' pk=item_detail.pk %}" class="btn btn-warning">Update</a></p>
+        <p><a href="{% url 'inventory:update' pk=item_detail.pk %}" class="btn btn-warning">Update</a>
+           <a href="{% url 'inventory:delete' pk=item_detail.pk %}" class="btn btn-warning">Delete</a></p>
     </div>
     
     {% endif %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from inventory.models import Item, Manufacturer, Transaction
+from inventory.models import Item, Manufacturer, Transaction, Log
 
 # Register your models here.
 
@@ -10,10 +10,12 @@ class ItemAdmin(admin.ModelAdmin):
 
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ['trans_id', 'quantity', 'item', 'sellPrice', 'imei', 'custName', 'custAdd', 'cusPhone']
+    list_display = ['trans_id', 'quantity', 'item', 'sellPrice', 'user',
+                    'imei', 'custName', 'custAdd', 'cusPhone']
     search_fields = ['trans_id', 'imei', 'cusPhone']
 
 
 admin.site.register(Manufacturer)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Transaction, TransactionAdmin)
+admin.site.register(Log)

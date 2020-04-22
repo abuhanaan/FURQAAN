@@ -10,4 +10,9 @@
     {% endfor %}
         
     {% endif %}
+
+    <div class="container">
+        <p><a href="{% url 'inventory:create-item' %}" class="btn btn-primary">New Item</a></p>
+    </div>
+
 {% endblock %}

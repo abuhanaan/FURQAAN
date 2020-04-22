@@ -36,6 +36,10 @@
                 {% if user.is_authenticated %}
                     <li><a class="navbar-brand" href="{% url 'inventory:list' %}">Items</a></li>
                     <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+                    <li><a class="navbar-link" href="{% url 'inventory:trans-list' %}">Transactions</a></li>
+                    <li><a class="navbar-link" href="{% url 'inventory:create_cashierLog' %}">Create Log</a></li>
+                    <li><a class="navbar-link" href="{% url 'inventory:list_cashierLog' %}">Log Book</a></li>
+                    
                     <li><a href="{% url 'accounts:logout' %}" class="btn btn-simple">Log out</a></li>
                 {% else %}
                     <li><a href="{% url 'accounts:login' %}" class="btn btn-simple">Log in</a></li>

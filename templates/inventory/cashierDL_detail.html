@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+
+    
+    {% if user.is_authenticated %}
+        <div class="jumbotron">
+            <h2>Item Sales Details</h2>
+            <p>Item: {{cashier_daily_log_detail.item}}</p>
+            <p>Quantity taken for the day: {{cashier_daily_log_detail.quantity_assigned}}</p>
+            <p>Quantity sold: {{cashier_daily_log_detail.quantity_sold}}</p>
+            <p>Quantity remaining: {{cashier_daily_log_detail.quantity_inStock}}</p>
+        </div>
+        <div class="container">
+                <p><a href="{% url 'inventory:update_cashierLog' pk=cashier_daily_log_detail.pk %}" class="btn btn-warning">Update</a>
+                   <a href="{% url 'inventory:delete_cashierLog' pk=cashier_daily_log_detail.pk %}" class="btn btn-warning">Delete</a></p>
+        </div>
+    {% endif %}
+        
+
+{% endblock %}
+    

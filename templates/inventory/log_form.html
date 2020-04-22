@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+
+{% if user.is_authenticated %}
+    
+    <h1>
+        
+        {% if not form.instance.pk %}
+            Create/Add Item Into Cashier Daily Stock
+            {% else %}
+            Update Cashier Daily Stock
+        {% endif %}
+            
+    </h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+
+    {% endif %}
+
+{% endblock %}
+    

@@ -15,8 +15,24 @@ urlpatterns = [
         name='create-trans'),
     url('^trans-list/$', views.TransactionListView.as_view(),
         name='trans-list'),
-    url(r'^(?P<pk>\d+)/$', views.TransactionDetailView.as_view(),
+    url(r'^trans-list/(?P<pk>\d+)/$', views.TransactionDetailView.as_view(),
         name='trans-detail'),
+    url(r'^print-reciept/(?P<pk>\d+)/$', views.PrintReceipt.as_view(),
+        name='print-receipt'),
     url(r'^update-trans/(?P<pk>\d+)/$', views.TransactionUpdateView.as_view(),
-        name='update'),
+        name='update-trans'),
+    url(r'^delete-trans/(?P<pk>\d+)/$', views.TransactionDeleteView.as_view(),
+        name='delete-trans'),
+    url(r'^trans-list/my-trans/(?P<username>[-\w]+)/$',
+        views.CashierTransactionList.as_view(), name='my-trans'),
+    url(r'^create_cashierLog/$', views.LogCreateView.as_view(),
+        name='create_cashierLog'),
+    url(r'^list_cashierLog/', views.LogListView.as_view(),
+        name='list_cashierLog'),
+    url(r'^list_cashierLog/(?P<pk>\d+)/$', views.LogDetailView.
+        as_view(), name='detail_cashierLog'),
+    url(r'^update_cashierLog/(?P<pk>\d+)/$', views.LogUpdateView.
+        as_view(), name='update_ashierLog'),
+    url(r'^delete_cashierLog/(?P<pk>\d+)/$', views.LogDeleteView.
+        as_view(), name='delete_cashierLog'),
 ]

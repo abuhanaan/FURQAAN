@@ -1,0 +1,13 @@
+{% load bootstrap3 %}
+
+<div class="jumbotron">
+    <h2>Transaction details</h2>
+    <p>Cashier: {{transaction.user}}</p>
+    <p>Name: {{transaction.custName}}</p>
+    <p>Address: {{transaction.custAdd}}</p>
+    <p>Item: {{transaction.item}}</p>
+    <p>Quantity: {{transaction.quantity}}</p>
+    <p>IMEI: {{transaction.imei}}</p>
+    <p>Amount Paid: {{transaction.sellPrice}}</p>
+</div>
+

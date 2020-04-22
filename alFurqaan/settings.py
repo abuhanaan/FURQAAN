@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'inventory',
     'accounts',
     'bootstrap3',
+    'easy_pdf',
+    'six'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+
+{% if user.is_authenticated %}
+<div class="table-resposive">
+    <table class="table table-bordered table-condensed table-hover">
+        <h1>CASHIER DAILY LOG</h1>
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>ITEMS</th>
+                    <th>QUANTITY ASSIGNED</th>
+                    <th>QUANTITY SOLD</th>
+                    <th>QUANTITY IN STOCK</th>
+                </tr>
+            {% for log in logs %}
+                <tr>
+                    <td><h4>{{log.id}}</h4></td>
+                    <td><h4><a href="{{log.id}}">{{log.item}}</a></h4></td>
+                    <td><h4>{{log.quantity_assigned}}</h4></td>
+                    <td><h4>{{log.quanity_sold}}</h4></td>
+                    <td><h4>{{log.quantityinStock}}</h4></td>
+                </tr>
+            {% endfor %}
+    </table>
+</div>      
+    
+        
+    {% endif %}
+
+    <div class="container">
+        <p><a href="{% url 'inventory:create-item' %}" class="btn btn-primary">New Item</a></p>
+    </div>
+
+
+{% endblock %}
+    
