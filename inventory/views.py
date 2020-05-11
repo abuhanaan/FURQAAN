@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from inventory import models
-from inventory.models import Log
+from inventory.models import Log, Item, Transaction
 from django.views.generic import (TemplateView, ListView, DetailView,
                                   CreateView, UpdateView, DeleteView)
 
@@ -53,7 +53,7 @@ class ItemDeleteView(DeleteView):
     success_url = reverse_lazy('inventory:list')
 
 
-class TransactionCreateView(LoginRequiredMixin, CreateView):
+class TransactionCreateView(LoginRequiredMixin, CreateView,):
     fields = ('quantity', 'item', 'sellPrice', 'imei', 'custName', 'custAdd',
               'cusPhone', 'custEmail', 'note')
     model = models.Transaction
@@ -65,12 +65,16 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
         return log.quantity_sold
     """
 
-    def sortData(request, self, *args, **kwargs):
-        log = Log.objects.get(pk=id)
-        quantity = request.POST.get('quantity')
+    # def sortData(request, self, *args, **kwargs):
+    """import pdb
+    pdb.set_trace()"""
 
-        if self.item.item_name == log.item.item_name and quantity < log.quantity_inStock:
-            log.quantity_sold += quantity
+    def sortData(self, request, sort_field):
+        log = Log.objects.get(pk=id)
+        self.quantity = request.POST.get('quantity')
+
+        if self.item.item_id == log.item.item_id and self.quantity < log.quantity_inStock:
+            log.quantity_sold += self.quantity
         else:
             messages.warning(request, 'The quantity you intend to sell out is lower than the pieces in your stock')
         log.save()
@@ -79,8 +83,41 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
+        self.sortData(self.request, 'quantity')
         self.object.save()
         return super().form_valid(form)
+
+
+"""
+def transactionView(request):
+    item = Item.objects.get(pk=Item.id)
+    quantity = request.POST.get('quantity')
+    sellPrice = request.POST.get('sellPrice')
+    imei = request.POST.get('imei')
+    custName = request.POST.get('custName')
+    custAdd = request.POST.get('custAdd')
+    cusPhone = request.POST.get('cusPhone')
+    custEmail = request.POST.get('custEmail')
+    note = request.POST.get('note')
+
+    transaction = Transaction(item=item, quantity=quantity,
+                              sellPrice=sellPrice, imei=imei,
+                              custName=custName, custAdd=custAdd,
+                              cusPhone=cusPhone, custEmail=custEmail,
+                              note=note)
+
+    log = Log.objects.get(pk=id)
+    object.user = request.user
+    if item.item_id == log.item.item_id and quantity < log.quantity_inStock:
+        log.quantity_sold += quantity
+    else:
+        messages.warning(request, 'The quantity you intend to sell out is lower than the pieces in your stock')
+    log.save()
+    transaction.save()
+    # return log.quantity_sold
+    return render(request, 'inventory/transaction_form.html',
+                  {'transaction': transaction})
+"""
 
 
 class TransactionListView(LoginRequiredMixin, ListView):
