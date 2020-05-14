@@ -5,7 +5,7 @@ from inventory.models import Item, Manufacturer, Transaction, Log
 
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'item_name', 'maker', 'quantity', 'priceByDefault']
+    list_display = ['item_id', 'item_name', 'maker', 'quantity', 'priceByDefault']
     search_fields = ['item_name']
 
 

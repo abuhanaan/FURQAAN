@@ -58,23 +58,20 @@ class TransactionCreateView(LoginRequiredMixin, CreateView,):
               'cusPhone', 'custEmail', 'note')
     model = models.Transaction
 
-    """
-    def cashierDataMgmt(self, *args, **kwargs,):
-        if self.item == log.item and self.quantity < log.quantity_assigned:
-            log.quantity_sold += self.quantity
-        return log.quantity_sold
-    """
-
+    # def cashierDataMgmt(self, *args, **kwargs,):
+    #    if self.item == log.item and self.quantity < log.quantity_assigned:
+    #        log.quantity_sold += self.quantity
+    #    return log.quantity_sold
     # def sortData(request, self, *args, **kwargs):
-    """import pdb
-    pdb.set_trace()"""
+    # import pdb
+    # pdb.set_trace()
 
-    def sortData(self, request, sort_field):
-        log = Log.objects.get(pk=id)
-        self.quantity = request.POST.get('quantity')
+    def sortData(self, request, quantity, log_id):
+        log = Log.objects.get(pk=log_id)
+        quantity = request.POST.get('quantity')
 
         if self.item.item_id == log.item.item_id and self.quantity < log.quantity_inStock:
-            log.quantity_sold += self.quantity
+            log.quantity_sold += quantity
         else:
             messages.warning(request, 'The quantity you intend to sell out is lower than the pieces in your stock')
         log.save()
@@ -83,14 +80,14 @@ class TransactionCreateView(LoginRequiredMixin, CreateView,):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.sortData(self.request, 'quantity')
+        self.sortData(self.request, 'quantity', Log.log_id)
         self.object.save()
         return super().form_valid(form)
 
 
 """
 def transactionView(request):
-    item = Item.objects.get(pk=Item.id)
+    item = Item.objects.get(pk=Item.item_id)
     quantity = request.POST.get('quantity')
     sellPrice = request.POST.get('sellPrice')
     imei = request.POST.get('imei')
@@ -106,7 +103,7 @@ def transactionView(request):
                               cusPhone=cusPhone, custEmail=custEmail,
                               note=note)
 
-    log = Log.objects.get(pk=id)
+    log = Log.objects.get(pk=Log.log_id)
     object.user = request.user
     if item.item_id == log.item.item_id and quantity < log.quantity_inStock:
         log.quantity_sold += quantity

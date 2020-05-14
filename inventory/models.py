@@ -17,7 +17,7 @@ class Manufacturer(models.Model):
 
 
 class Item(models.Model):
-    id = models.AutoField(primary_key=True)
+    item_id = models.AutoField(primary_key=True)
     item_name = models.CharField(max_length=15)
     maker = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
@@ -70,7 +70,7 @@ class Transaction(models.Model):
 
 
 class Log(models.Model):
-    id = models.AutoField(primary_key=True)
+    log_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity_assigned = models.IntegerField(default=0)
@@ -82,4 +82,4 @@ class Log(models.Model):
         return self.item.item_name
 
     def get_absolute_url(self):
-        return reverse('inventory:list_cashierLog', kwargs={'pk': self.pk})
+        return reverse('inventory:detail_cashierLog', kwargs={'pk': self.pk})
